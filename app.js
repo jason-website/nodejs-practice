@@ -1,5 +1,3 @@
-const http = require('http');
-const routes = require("./routes");
 const express = require('express');
 const app = express();
 //use to allow us to add a new middle ware function. It accepts an array of so-called request handlers here.
@@ -15,6 +13,4 @@ app.use((req, res, next)=>{
     res.send('<h1>Hello From Express!</h1>')//allow us to attach a body, default header is text/html
 });
 
-const server = http.createServer(app);
-
-server.listen(3000);
+app.listen(3000);
