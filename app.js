@@ -21,11 +21,11 @@ const server = http.createServer((req, res) => {
             const parsedBody = Buffer.concat(body).toString();//buffer is our bus stop. I know the incoming data will be text.
             const message = parsedBody.split('=')[1];
             fs.writeFileSync('message.txt', message);
+            res.statusCode = 302;
+            res.setHeader('Location', '/');//location is the default header accepted by the browser. Using slash means it
+            //will use the host we are already running on.
+            return res.end();
         });//this will be fired once it is done parsing the incoming requests data or incoming requests general
-        res.statusCode = 302;
-        res.setHeader('Location', '/');//location is the default header accepted by the browser. Using slash means it
-        //will use the host we are already running on.
-        return res.end();
     }
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');
