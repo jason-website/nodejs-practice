@@ -17,14 +17,15 @@ const server = http.createServer((req, res) => {
             console.log(chunk);
             body.push(chunk);
         });//I want to listen for the data event. the data event will be fired whenever a new chunk is ready to be read.
-        req.on('end', () => {
+        return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();//buffer is our bus stop. I know the incoming data will be text.
             const message = parsedBody.split('=')[1];
-            fs.writeFileSync('message.txt', message);
+            fs.writeFile('message.txt', message, error => {
             res.statusCode = 302;
             res.setHeader('Location', '/');//location is the default header accepted by the browser. Using slash means it
             //will use the host we are already running on.
             return res.end();
+            });
         });//this will be fired once it is done parsing the incoming requests data or incoming requests general
     }
     res.setHeader('Content-Type', 'text/html');
