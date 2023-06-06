@@ -7,7 +7,7 @@ const shopRoutes = require('./routes/shop');
 const app = express();
 // it registers a middleware, this function in the end just yields us such a middleware function.
 app.use(bodyParser.urlencoded({extended: false}))//should be able to parse non-default features
-app.use(adminRoutes);
+app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use((req, res, next)=>{

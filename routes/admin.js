@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get('/add-product',(req, res, next)=>{
     console.log('In the another middleWare');
-    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>')//allow us to attach a body, default header is text/html
+    res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>')//allow us to attach a body, default header is text/html
 });
-router.post('/product',(req, res, next)=>{
+router.post('/add-product',(req, res, next)=>{
     console.log(req.body);
     res.redirect('/');
 });
