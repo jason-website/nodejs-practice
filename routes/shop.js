@@ -5,11 +5,15 @@ const rootDir = require('../util/path');
 var adminData = require('./admin');
 
 router.get('/', (req, res, next) => {
-    console.log(adminData.products);
-    //__dirname this is global variable which simply holds the absolute path  on our operating system.
-    //path.join() 会自动识别是哪个系统然后自动生成对应的路径
-    //../go up one level
-res.sendFile(path.join(rootDir,'views','shop.html'))//send file to the user
+    const products = adminData.products;
+    res.render('shop', {
+        prods: products,
+        pageTitle: 'Shop',
+        path: '/',
+        hasProducts: products.length > 0,
+        activeShop: true,
+        productCSS: true
+    });
 });
 
 module.exports = router;
