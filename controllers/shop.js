@@ -1,3 +1,5 @@
+
+
 const adminData = require("../routes/admin");
 
 const Product = require('../models/product');
@@ -33,6 +35,13 @@ exports.getCart = (req, res, next) => {
         path: '/cart'
     });
 };
+
+exports.postCart = (req, res, next) => {
+    const productId = req.body.productId;
+    console.log(productId);
+    res.redirect('/cart');
+};
+
 exports.getCheckout = (req, res, next) => {
     res.render('shop/checkout', {
         pageTitle: 'Checkout',
