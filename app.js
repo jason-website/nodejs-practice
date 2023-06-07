@@ -4,6 +4,8 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const path = require('path');
 
+const errorController = require('./controllers/error');
+
 
 const app = express();
 
