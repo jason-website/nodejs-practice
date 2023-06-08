@@ -2,6 +2,7 @@ const adminData = require("../routes/admin");
 
 const Product = require('../models/product');
 const Cart = require('../models/carts');
+const e = require("express");
 exports.getProducts = (req, res, next) => {
     Product.fetchAll((products) => {
         res.render('shop/product-list', {
@@ -55,6 +56,15 @@ exports.postCart = (req, res, next) => {
     console.log(productId);
     res.redirect('/cart');
 };
+
+exports.postCartDeleteProduct = (req, res, next) => {
+    const productId = req.body.productId;
+    Product.findById(productId, product => {
+        Cart.deleteProduct(productId, product.price);
+        res.redirect('/cart');
+    })
+
+}
 
 exports.getCheckout = (req, res, next) => {
     res.render('shop/checkout', {
